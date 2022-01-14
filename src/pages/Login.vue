@@ -13,6 +13,7 @@
                 isValidaEmailAddress(val) ||
                 'Please enter avalid email address',
             ]"
+            lazy-rules
             type="email"
             label="E-Mail"
           >
@@ -23,6 +24,7 @@
 
           <q-input
             outlined
+            lazy-rules
             :rules="[
               (val) => val.length >= 6 || 'Please enter at least 6 caracters',
             ]"
@@ -40,7 +42,13 @@
             </template>
           </q-input>
           <div class="flex flex-center">
-            <q-btn rounded class="full-width" color="primary" label="Logar" />
+            <q-btn
+              type="submit"
+              rounded
+              class="full-width"
+              color="primary"
+              label="Logar"
+            />
           </div>
         </q-form>
       </q-card-section>
@@ -49,10 +57,11 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      isPwd: false,
+      isPwd: true,
       form: {
         email: "",
         password: "",
@@ -60,6 +69,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions("auth", ["loginUser"]),
     isValidaEmailAddress(val) {
       return String(val)
         .toLowerCase()
@@ -70,6 +80,9 @@ export default {
     submitForm() {
       this.$refs.email.validate();
       this.$refs.password.validate();
+      if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
+        this.loginUser(this.form);
+      }
     },
   },
 };
