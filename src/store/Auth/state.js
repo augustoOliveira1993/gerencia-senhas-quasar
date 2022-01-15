@@ -1,3 +1,6 @@
 export default function () {
-  return {};
+  return {
+    user: null,
+    loggedIn: false,
+  };
 }

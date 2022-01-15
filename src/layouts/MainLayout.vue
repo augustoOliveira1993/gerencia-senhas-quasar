@@ -14,6 +14,9 @@
         <q-toolbar-title> Gerencia Senhas </q-toolbar-title>
 
         <div>v{{ version }}</div>
+
+        <q-btn v-if="!loggedIn" to="/auth" flat label="Login" />
+        <q-btn v-if="loggedIn" @click="logoutUser" flat icon-right="logout" />
       </q-toolbar>
     </q-header>
 
@@ -33,7 +36,7 @@
         <q-list padding>
           <q-item clickable v-ripple to="/index">
             <q-item-section avatar>
-              <q-icon name="home" />
+              <q-icon name="vpn_key" />
             </q-item-section>
 
             <q-item-section> Senhas </q-item-section>
@@ -58,7 +61,7 @@
           <q-avatar size="56px" class="q-mb-sm">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
           </q-avatar>
-          <div class="text-weight-bold">Anonimo</div>
+          <div class="text-weight-bold">{{ user }}</div>
           <div>@anonimo</div>
         </div>
       </q-img>
@@ -71,9 +74,17 @@
 </template>
 
 <script>
+import { LocalStorage } from "quasar";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "MainLayout",
   components: {},
+  computed: {
+    ...mapState("auth", ["loggedIn", "user"]),
+  },
+  methods: {
+    ...mapActions("auth", ["logoutUser"]),
+  },
   data() {
     return {
       version: "1.0.0",
