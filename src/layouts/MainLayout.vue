@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="bg-grey-3">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -15,7 +15,6 @@
 
         <div>v{{ version }}</div>
 
-        <q-btn v-if="!loggedIn" to="/auth" flat label="Login" />
         <q-btn v-if="loggedIn" @click="logoutUser" flat icon-right="logout" />
       </q-toolbar>
     </q-header>
@@ -34,7 +33,7 @@
         "
       >
         <q-list padding>
-          <q-item clickable v-ripple to="/index">
+          <q-item clickable v-ripple exact to="/">
             <q-item-section avatar>
               <q-icon name="vpn_key" />
             </q-item-section>
@@ -42,7 +41,7 @@
             <q-item-section> Senhas </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple to="/sobre">
+          <q-item clickable v-ripple exact to="/sobre">
             <q-item-section avatar>
               <q-icon name="info" />
             </q-item-section>
@@ -61,8 +60,8 @@
           <q-avatar size="56px" class="q-mb-sm">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
           </q-avatar>
-          <div class="text-weight-bold">{{ user }}</div>
-          <div>@anonimo</div>
+          <div v-if="user">{{ user.email }}</div>
+          <div class="text-italic">Cliente</div>
         </div>
       </q-img>
     </q-drawer>
@@ -74,7 +73,6 @@
 </template>
 
 <script>
-import { LocalStorage } from "quasar";
 import { mapState, mapActions } from "vuex";
 export default {
   name: "MainLayout",
@@ -85,6 +83,7 @@ export default {
   methods: {
     ...mapActions("auth", ["logoutUser"]),
   },
+  mounted() {},
   data() {
     return {
       version: "1.0.0",

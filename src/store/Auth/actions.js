@@ -11,7 +11,7 @@ export function loginUser({}, payload) {
     .signInWithEmailAndPassword(auth, payload.email, payload.password)
     .then((userCredential) => {
       showMessageSucess("Usuario loagado!, Seja bem vindo!!");
-      this.$router.push("/index");
+      this.$router.push("/");
     })
     .catch((error) => {
       if (error.code == "auth/user-not-found") {
@@ -59,12 +59,13 @@ export function handleAuthStateChange({ commit, dispatch }) {
     if (user) {
       LocalStorage.set("user", user);
       dispatch("setUsuario", user);
-      commit("setLoggedIn", true);
+      dispatch("senhas/fbReadData", null, { root: true });
       LocalStorage.set("loggedIn", true);
       this.$router.push("/");
     } else {
       LocalStorage.set("user", null);
       commit("setLoggedIn", false);
+      dispatch("senhas/clearSenhas", null, { root: true });
       dispatch("setUsuario", null);
       LocalStorage.set("loggedIn", false);
       this.$router.replace("/auth");

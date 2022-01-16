@@ -69,7 +69,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("auth", ["loginUser"]),
+    ...mapActions("auth", ["loginUser", "registerUser"]),
     isValidaEmailAddress(val) {
       return String(val)
         .toLowerCase()
@@ -80,8 +80,11 @@ export default {
     submitForm() {
       this.$refs.email.validate();
       this.$refs.password.validate();
+      console.log(this.$refs.email.hasError);
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
         this.loginUser(this.form);
+      } else {
+        // this.registerUser(this.form);
       }
     },
   },

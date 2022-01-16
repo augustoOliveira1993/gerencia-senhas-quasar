@@ -1,2 +1,1 @@
-export function someGetter (/* state */) {
-}
+export function senhas(state, getters) {}

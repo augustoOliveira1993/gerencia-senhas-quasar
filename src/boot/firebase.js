@@ -1,5 +1,7 @@
 import * as firebase from "firebase/app";
 import * as firebaseAuth from "firebase/auth";
+import * as database from "firebase/database";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAlGZU303EFl0se4NOGXb5Fmf44D2lAmY4",
   authDomain: "gerencia-senhas.firebaseapp.com",
@@ -11,6 +13,12 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const auth = firebaseAuth.getAuth();
 const fireAuth = firebaseAuth;
-export { fireAuth, auth };
+
+// Banco de dados
+const db = database.getDatabase();
+const fireDb = database;
+
+export { fireAuth, auth, fireDb, db };

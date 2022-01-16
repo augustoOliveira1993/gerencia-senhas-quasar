@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import auth from "./Auth";
+import senhas from "./Senhas";
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       auth,
+      senhas,
     },
 
     // enable strict mode (adds overhead!)
