@@ -14,6 +14,7 @@ export function loginUser({}, payload) {
       this.$router.push("/");
     })
     .catch((error) => {
+      Loading.hide();
       if (error.code == "auth/user-not-found") {
         showMessageError(error.message);
       } else {
@@ -31,6 +32,7 @@ export function registerUser({}, payload) {
       this.$router.push("/index");
     })
     .catch((error) => {
+      Loading.hide();
       if (error.code == "auth/user-not-found") {
         showMessageError(error.message);
       } else {
@@ -49,6 +51,7 @@ export function logoutUser() {
       showMessageSucess("Usuario deslogado!");
     })
     .catch((error) => {
+      Loading.hide();
       showMessageError(error.message);
     });
 }
@@ -59,6 +62,7 @@ export function handleAuthStateChange({ commit, dispatch }) {
     if (user) {
       LocalStorage.set("user", user);
       dispatch("setUsuario", user);
+      commit("setLoggedIn", true);
       dispatch("senhas/fbReadData", null, { root: true });
       LocalStorage.set("loggedIn", true);
       this.$router.push("/");

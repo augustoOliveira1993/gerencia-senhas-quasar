@@ -1,6 +1,6 @@
 <template>
   <q-card style="width: 500px">
-    <modal-header>Adicionar Senha</modal-header>
+    <modal-header>Editar Senha</modal-header>
     <q-form @submit.prevent="submitForm">
       <q-card-section>
         <modal-senha-plataforma
@@ -30,6 +30,7 @@ import ModalSenhaPlataforma from "./Shared/ModalSenhaPlataforma.vue";
 import ModalSenhaUsername from "./Shared/ModalSenhaUsername.vue";
 import { mapActions } from "vuex";
 export default {
+  props: ["senha", "id"],
   data() {
     return {
       senhaToSubmit: {
@@ -47,7 +48,7 @@ export default {
     ModalSenhaPassword,
   },
   methods: {
-    ...mapActions("senhas", ["addSenha"]),
+    ...mapActions("senhas", ["updateSenha"]),
     submitForm() {
       this.$refs.modalSenhaPlataforma.$refs.plataforma.validate();
       this.$refs.modalSenhaUsername.$refs.username.validate();
@@ -62,7 +63,10 @@ export default {
       }
     },
     submitSenha() {
-      this.addSenha(this.senhaToSubmit);
+      this.updateSenha({
+        id: this.id,
+        updates: this.senhaToSubmit,
+      });
       this.$emit("close");
     },
     clearDueDate() {
@@ -70,6 +74,9 @@ export default {
       this.senhaToSubmit.username = "";
       this.senhaToSubmit.password = "";
     },
+  },
+  mounted() {
+    this.senhaToSubmit = Object.assign({}, this.senha);
   },
 };
 </script>

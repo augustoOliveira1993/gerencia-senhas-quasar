@@ -23,7 +23,6 @@ export function addSenha({ dispatch }, senha) {
     id: senhaId,
     senha: senha,
   };
-  console.log(payload.senha);
   dispatch("fbAddSenha", payload);
 }
 

@@ -21,7 +21,6 @@ export function senhasFieldered(state, getters) {
         searchLowerCase = state.search.toLowerCase();
       if (senhasPlataformaCase.toLowerCase().includes(searchLowerCase)) {
         senhasField[key] = senha;
-        console.log(senha);
       }
     });
     return senhasField;

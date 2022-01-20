@@ -80,13 +80,22 @@
               ></i>
             </q-td>
           </template>
+
+          <template v-slot:body-cell-plataforma="props">
+            <q-td :props="props">
+              <q-item-label
+                :class="{ 'text-strike': !props.value }"
+                v-html="$options.filters.searchHighlight(props.value, search)"
+              >
+              </q-item-label>
+            </q-td>
+          </template>
         </q-table>
       </q-card>
     </template>
     <template v-else>
       <q-spinner-gears class="absolute-center" size="10em" color="primary"
     /></template>
-
     <q-dialog v-model="showAddSenha">
       <add-senha @close="showAddSenha = false" />
     </q-dialog>
@@ -104,6 +113,7 @@ export default {
   name: "PageIndex",
   data() {
     return {
+      showEditSenha: false,
       initialPagination: {
         sortBy: "desc",
         descending: false,
@@ -176,6 +186,17 @@ export default {
       },
     };
   },
+  filters: {
+    searchHighlight(value, search) {
+      if (search) {
+        let searchRegExp = new RegExp(search, "ig");
+        return value.replace(searchRegExp, (match) => {
+          return '<span class="bg-yellow-6">' + match + "</span>";
+        });
+      }
+      return value;
+    },
+  },
   methods: {
     copiarTexto(texto) {
       copyToClipboard(texto)
@@ -190,7 +211,7 @@ export default {
   },
   computed: {
     ...mapState("auth", ["user"]),
-    ...mapState("senhas", ["senhasDownloaded", "senhas"]),
+    ...mapState("senhas", ["senhasDownloaded", "senhas", "search"]),
     ...mapGetters("senhas", ["senhas"]),
   },
 };
