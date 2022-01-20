@@ -10,20 +10,39 @@ export function senhas(state, getters) {
   return senhas;
 }
 
-export function senhasFieldered(state) {
-  let senhasFielderd = state.senhas;
-  let senhasFieldered = [];
+export function senhasFieldered(state, getters) {
+  let senhasSorted = getters.senhasSorted;
+  let senhasField = {};
+
   if (state.search) {
-    Object.keys(state.senhas).forEach((key) => {
-      let senhaSearch = senhasFielderd[key].plataforma.toLowerCase();
-      let searchSenhas = state.search.toLowerCase();
-      if (senhaSearch.include(searchSenhas)) {
-        senhasFieldered.id = key;
-        senhasFieldered.push(senhasFielderd[key]);
-        console.log();
+    Object.keys(senhasSorted).forEach((key) => {
+      let senha = senhasSorted[key],
+        senhasPlataformaCase = senha.plataforma.toLowerCase(),
+        searchLowerCase = state.search.toLowerCase();
+      if (senhasPlataformaCase.toLowerCase().includes(searchLowerCase)) {
+        senhasField[key] = senha;
+        console.log(senha);
       }
     });
-    return senhasFieldered;
+    return senhasField;
   }
-  return state.senhas;
+  return senhasSorted;
+}
+
+export function senhasSorted(state) {
+  let senhasSorted = {},
+    keysOrdered = Object.keys(state.senhas);
+  keysOrdered.sort((a, b) => {
+    let senhaAProp = state.senhas[a][state.sort].toLowerCase(),
+      senhaBProp = state.senhas[b][state.sort].toLowerCase();
+    if (senhaAProp > senhaBProp) return 1;
+    else if (senhaAProp < senhaBProp) return -1;
+    else return 0;
+  });
+
+  keysOrdered.forEach((key) => {
+    senhasSorted[key] = state.senhas[key];
+  });
+
+  return senhasSorted;
 }
