@@ -65,7 +65,7 @@ export function handleAuthStateChange({ commit, dispatch }) {
       commit("setLoggedIn", true);
       dispatch("senhas/fbReadData", null, { root: true });
       LocalStorage.set("loggedIn", true);
-      this.$router.push("/");
+      this.$router.replace("/");
     } else {
       commit("senhas/clearSenhas", null, { root: true });
       LocalStorage.set("user", null);
