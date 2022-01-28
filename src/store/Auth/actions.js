@@ -43,7 +43,7 @@ export function registerUser({}, payload) {
 export function setUsuario({ commit }, user) {
   commit("setUsuario", user);
 }
-export function logoutUser() {
+export function logoutUser({ dispatch }) {
   Loading.show();
   fireAuth
     .signOut(auth)
@@ -67,9 +67,9 @@ export function handleAuthStateChange({ commit, dispatch }) {
       LocalStorage.set("loggedIn", true);
       this.$router.push("/");
     } else {
+      commit("senhas/clearSenhas", null, { root: true });
       LocalStorage.set("user", null);
       commit("setLoggedIn", false);
-      dispatch("senhas/clearSenhas", null, { root: true });
       dispatch("setUsuario", null);
       LocalStorage.set("loggedIn", false);
       this.$router.replace("/auth");
