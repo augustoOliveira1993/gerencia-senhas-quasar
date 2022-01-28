@@ -4,7 +4,8 @@
       "ID1": {
         "plataforma": "GitHub",
         "username": "gutim160@gmail.com",
-        "password": "augusto88146347"
+        "password": "augusto88146347",
+        "showPassword": false
       }
     }
   }
