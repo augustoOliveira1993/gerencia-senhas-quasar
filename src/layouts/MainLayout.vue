@@ -11,7 +11,10 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title> Gerencia Senhas </q-toolbar-title>
+        <q-toolbar-title>
+          <q-img width="50px" src="icons/icon-pass.png" :ratio="16 / 9" />
+          Gerencia Senhas
+        </q-toolbar-title>
 
         <div>v{{ version }}</div>
 
