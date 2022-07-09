@@ -29,6 +29,7 @@ export function addSenha({ dispatch }, senha) {
 export function fbReadData({ commit, state }) {
   let userId = auth.currentUser.uid;
   let data = fireDb.ref(db, `senhas/${userId}`);
+
   // initial check for data
   fireDb.onValue(data, (snap) => {
     commit("setSenhasDownloaded", true);

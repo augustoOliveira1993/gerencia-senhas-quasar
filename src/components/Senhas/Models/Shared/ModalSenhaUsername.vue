@@ -23,7 +23,27 @@
 
 <script>
 export default {
-  props: ["username"],
+  name: "ModalSenhaUsername",
+  props: {
+    value: {
+      type: String,
+      default: ""
+    }
+  },
+  computed: {
+     username: {
+      get() {
+        if (this.value == null) {
+          this.$emit("input", "");
+          return "";
+        }
+        return this.value;
+      },
+      set(newValue) {
+        this.$emit('input', newValue)
+      },
+    }
+  }
 };
 </script>
 

@@ -214,5 +214,8 @@ export default {
     ...mapState("senhas", ["senhasDownloaded", "senhas", "search"]),
     ...mapGetters("senhas", ["senhas"]),
   },
+  mounted() {
+    console.log(this.$router.currentRoute.path);
+  }
 };
 </script>

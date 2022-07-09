@@ -24,7 +24,27 @@
 
 <script>
 export default {
-  props: ["plataforma"],
+  name: "ModalSenhaPlataforma",
+  props: {
+    value: {
+      type: String,
+      default: ""
+    }
+  },
+  computed: {
+    plataforma: {
+      get() {
+        if (this.value == null) {
+          this.$emit("input", "");
+          return "";
+        }
+        return this.value;
+      },
+      set(newValue) {
+        this.$emit('input', newValue)
+      },
+    }
+  }
 };
 </script>
 

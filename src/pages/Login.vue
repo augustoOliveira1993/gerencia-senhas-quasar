@@ -80,7 +80,6 @@ export default {
     submitForm() {
       this.$refs.email.validate();
       this.$refs.password.validate();
-      console.log(this.$refs.email.hasError);
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
         this.loginUser(this.form);
       } else {

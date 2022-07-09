@@ -25,7 +25,27 @@
 
 <script>
 export default {
-  props: ["password"],
+  name: "ModalSenhaPassword",
+  props: {
+    value: {
+      type: String,
+      default: ""
+    }
+  },
+  computed: {
+     password: {
+      get() {
+        if (this.value == null) {
+          this.$emit("input", "");
+          return "";
+        }
+        return this.value;
+      },
+      set(newValue) {
+        this.$emit('input', newValue)
+      },
+    }
+  }
 };
 </script>
 

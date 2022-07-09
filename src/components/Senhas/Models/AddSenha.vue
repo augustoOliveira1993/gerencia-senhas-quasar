@@ -5,15 +5,15 @@
       <q-card-section>
         <modal-senha-plataforma
           ref="modalSenhaPlataforma"
-          :plataforma.sync="senhaToSubmit.plataforma"
+          v-model="senhaToSubmit.plataforma"
         />
         <modal-senha-username
           ref="modalSenhaUsername"
-          :username.sync="senhaToSubmit.username"
+          v-model="senhaToSubmit.username"
         />
         <modal-senha-password
           ref="modalSenhaPassword"
-          :password.sync="senhaToSubmit.password"
+          v-model="senhaToSubmit.password"
         />
       </q-card-section>
       <pre>{{ senhaToSubmit }}</pre>

@@ -29,8 +29,8 @@ export function senhasFieldered(state, getters) {
 }
 
 export function senhasSorted(state) {
-  let senhasSorted = {},
-    keysOrdered = Object.keys(state.senhas);
+  let senhasSorted = {}
+  let keysOrdered = Object.keys(state.senhas);
   keysOrdered.sort((a, b) => {
     let senhaAProp = state.senhas[a][state.sort].toLowerCase(),
       senhaBProp = state.senhas[b][state.sort].toLowerCase();
